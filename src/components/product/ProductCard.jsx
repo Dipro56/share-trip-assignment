@@ -11,23 +11,20 @@ import {
 import { BiCartAdd } from 'react-icons/bi';
 import { LuTrash2 } from 'react-icons/lu';
 
-import {
-  handleProductAddToCart,
-  handleProductDecrement,
-  handleProductIncrement,
-} from '@/utils/helper/productHelper';
+import { handleProductAddToCart } from '@/utils/helper/productHelper';
 import { useDispatch, useSelector } from 'react-redux';
 import { findCartItem } from '@/utils/helper/cartHelper';
 
 const ProductCard = ({ product }) => {
-  // let { user } = useUser();
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
+
   const [quantity, setQuantity] = useState();
+  const [isInCart, setIsInCart] = useState();
+
   const discountedPrice =
     product.price * (1 - product.discountPercentage / 100);
   const totalPrice = discountedPrice * quantity;
-  const [isInCart, setIsInCart] = useState();
 
   useEffect(() => {
     if (findCartItem(cartItems, product?.id)) {
@@ -73,7 +70,6 @@ const ProductCard = ({ product }) => {
             <div className="w-full flex items-center justify-between py-1 border bg-green-600 backdrop-blur-sm bg-black/10 hover:backdrop-blur-none rounded-lg  transition px-4">
               <button
                 onClick={() => {
-                  //handleProductDecrement(quantity, setQuantity);
                   handleDecrementQuantity();
                 }}
                 className="text-white"

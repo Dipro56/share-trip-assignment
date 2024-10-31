@@ -62,14 +62,9 @@ const cartSlice = createSlice({
     },
 
     getUserCartData: (state, action) => {
-      // const userId = action.payload;
       const storedCart = localStorage.getItem('achcart');
-      // if (storedCart) {
-      //   const parsedCart = JSON.parse(storedCart);
-      //   state.items = parsedCart.filter((item) => item.userId === userId);
-      // }
+
       const parsedCart = JSON.parse(storedCart);
-      console.log('parsedCart', parsedCart);
       if (parsedCart) state.items = parsedCart;
     },
   },

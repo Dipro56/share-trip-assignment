@@ -5,8 +5,6 @@ import { FiMinus, FiPlus } from 'react-icons/fi';
 import { CiShoppingCart } from 'react-icons/ci';
 import { useDispatch, useSelector } from 'react-redux';
 
-// import { useUser } from '@/hooks/useUsers';
-
 import {
   handleProductAddToCart,
   handleProductDecrement,
@@ -14,12 +12,10 @@ import {
 } from '@/utils/helper/productHelper';
 import { addToCart } from '@/redux/features/cart/cartSlice';
 import notifications from '@/utils/notification';
-// import { RootState, AppDispatch } from '../../redux/store';
 
 const ProductDetails = ({ productDetails }) => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
-  //let { user } = useUser();
   const cartItems = useSelector((state) => state.cart.items);
 
   const discountedPrice =
