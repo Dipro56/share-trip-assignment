@@ -3,23 +3,24 @@ import React, { useState } from 'react';
 import { IoMdStar } from 'react-icons/io';
 import { FiMinus, FiPlus } from 'react-icons/fi';
 import { CiShoppingCart } from 'react-icons/ci';
-//import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 // import { useUser } from '@/hooks/useUsers';
 
-// import {
-//   handleProductAddToCart,
-//   handleProductDecrement,
-//   handleProductIncrement,
-// } from '@/utils/helper/productHelper';
-// import { addToCart } from '@/redux/features/cart/cartSlice';
+import {
+  handleProductAddToCart,
+  handleProductDecrement,
+  handleProductIncrement,
+} from '@/utils/helper/productHelper';
+import { addToCart } from '@/redux/features/cart/cartSlice';
+import notifications from '@/utils/notification';
 // import { RootState, AppDispatch } from '../../redux/store';
 
 const ProductDetails = ({ productDetails }) => {
-  //const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
   //let { user } = useUser();
-  // const cartItems = useSelector((state: RootState) => state.cart.items);
+  const cartItems = useSelector((state) => state.cart.items);
 
   const discountedPrice =
     productDetails?.price * (1 - productDetails?.discountPercentage / 100);
@@ -115,7 +116,6 @@ const ProductDetails = ({ productDetails }) => {
       <button
         onClick={() => {
           handleProductAddToCart(
-            user,
             cartItems,
             productDetails,
             quantity,

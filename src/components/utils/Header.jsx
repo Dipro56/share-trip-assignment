@@ -9,7 +9,8 @@ import Image from 'next/image';
 // import UserDropdown from './UserDropdown';
 // import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
-// import { getUserCartData } from '@/redux/features/cart/cartSlice';
+import { getUserCartData } from '@/redux/features/cart/cartSlice';
+import { useDispatch, useSelector } from 'react-redux';
 // import { RootState } from '../../redux/store';
 // import { debounce } from '@/utils/config/globalFunctions';
 
@@ -21,14 +22,16 @@ function Header() {
   // const [searchQuery, setSearchQuery] = useState<string>('');
   // const pathname = usePathname();
 
-  //const dispatch = useDispatch();
-  //const cartItems = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.cart.items);
 
-  // useEffect(() => {
-  //   if (user && user.id) {
-  //     dispatch(getUserCartData(user.id));
-  //   }
-  // }, [dispatch, user]);
+  useEffect(() => {
+    dispatch(getUserCartData());
+
+    // if (user && user.id) {
+    //   dispatch(getUserCartData(user.id));
+    // }
+  }, [dispatch]);
 
   // const debouncedHandleSearchRoute = useCallback(
   //   debounce((query) => {
@@ -55,17 +58,28 @@ function Header() {
         </Link>
       </div>
 
-      <div gap={'3'} align={'center'}>
-        <button
-          radius="full"
+      <div className='flex'>
+        <div
+          className="relative cursor-pointer"
+          onClick={() => {
+            router.push('/cart');
+          }}
+        >
+          <div
+            className={`bg-orange-400 rounded-full py-1 px-2 absolute top-[-12px] left-[12px] text-xs font-semibold text-white`}
+          >
+            {cartItems?.length ? cartItems?.length : 0}
+          </div>
+          <CiShoppingCart className="text-2xl" />
+        </div>
+        {/* <button
           onClick={() => {
             router.push('/login');
           }}
-          variant="soft"
           className="cursor-pointer"
         >
           Login
-        </button>
+        </button> */}
 
         {/* {user?.image ? (
           <div>
